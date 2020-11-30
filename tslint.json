@@ -70,7 +70,7 @@
     ],
     "semicolon": {
       "options": [
-        "always"
+        "never"
       ]
     },
     "space-before-function-paren": {
@@ -78,7 +78,7 @@
         "anonymous": "never",
         "asyncArrow": "always",
         "constructor": "never",
-        "method": "never",
+        "method": "always",
         "named": "never"
       }
     },
