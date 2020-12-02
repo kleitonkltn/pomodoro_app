@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
 import { interval } from 'rxjs'
+import { AudioService } from 'src/app/services/audio.service'
 
 @Component({
   selector: 'app-timer',
@@ -13,6 +14,7 @@ export class TimerComponent implements OnChanges {
   initialValue: number
   seconds = 0
   running = false
+  constructor (private audioService: AudioService) { }
 
   ngOnChanges (changes: SimpleChanges) {
     if (changes.minutes) {
@@ -56,6 +58,7 @@ export class TimerComponent implements OnChanges {
       if (this.minutes === 0 && this.seconds === 0) {
         this.stop()
         this.completeTimer()
+        this.audioService.playSoundFinalTimer()
       } else if (this.minutes !== 0 && this.seconds === 0) {
         this.minutes--
         this.seconds = 59
