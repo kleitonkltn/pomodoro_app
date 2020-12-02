@@ -1,1 +1,16 @@
-<p>timer works!</p>
+<div class="timer-container">
+  <h1>{{title}}</h1>
+  <div class="timer">
+    {{minutes < 10 ? 0 : ''}}{{minutes}}:{{seconds < 10 ? 0 : ''}}{{seconds}}
+  </div>
+  <div class="buttons">
+    <button mat-raised-button color="{{!running ? 'primary' :'warn'}}"
+      (click)="!running ? start() : stop()">
+      <mat-icon>{{!running ? 'play_arrow': 'stop'}}</mat-icon>
+    </button>
+
+    <button mat-raised-button color="primary" class="m-2" (click)="reset()">
+      <mat-icon>autorenew</mat-icon>
+    </button>
+  </div>
+</div>
