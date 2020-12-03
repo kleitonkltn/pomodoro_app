@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser'
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core'
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core'
 
 import { AppComponent } from './app.component'
 import { TimerComponent } from './components/timer/timer.component'
@@ -10,6 +10,9 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { registerLocaleData } from '@angular/common'
+import localePt from '@angular/common/locales/pt'
+registerLocaleData(localePt)
 
 
 
@@ -35,7 +38,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
   exports: [
     TimerComponent
   ],
-  providers: [],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt-BR' },
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   bootstrap: [AppComponent]
 })
