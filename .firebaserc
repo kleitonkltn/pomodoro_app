@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "app-pomodoro-timer": {
+      "hosting": {
+        "pomodoro-app": [
+          "app-pomodoro-timer"
+        ]
+      }
+    }
+  }
+}
