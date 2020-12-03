@@ -1,1 +1,36 @@
-<app-timer></app-timer>
+<div class="top">
+  <h1 class="text-light">Pomodoro Timer</h1>
+</div>
+<div class="timer-body">
+
+  <div class="form">
+    <mat-form-field class="w-100">
+      <mat-label>Tempo de Pomodoro</mat-label>
+      <input type="number" min="1" [(ngModel)]="pomodoroTime" matInput>
+      <b matSuffix>min</b>
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <mat-label>Tempo de Intervalo</mat-label>
+      <input type="number" min="1" [(ngModel)]="intervalTime" matInput>
+      <b matSuffix>min</b>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="submitForm()"
+      class="w-100">
+      Salvar
+    </button>
+  </div>
+
+  <app-timer *ngIf="activeTimer == timeTitles[0]" [title]="activeTimer"
+    [minutes]="minutes" (onComplete)="completeTime($event)">
+  </app-timer>
+  <app-timer *ngIf="activeTimer == timeTitles[1]" [title]="activeTimer"
+    [minutes]="minutes" (onComplete)="completeTime($event)">
+  </app-timer>
+  <app-timer *ngIf="activeTimer == timeTitles[2]" [title]="activeTimer"
+    [minutes]="longIntervalTime" (onComplete)="completeTime($event)">
+  </app-timer>
+
+  <div class="form">
+
+  </div>
+</div>

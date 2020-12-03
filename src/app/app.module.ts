@@ -8,8 +8,8 @@ import { MatInputModule } from '@angular/material/input'
 import { MatCommonModule } from '@angular/material/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
-import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 
 
@@ -22,10 +22,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
     BrowserModule,
     BrowserAnimationsModule,
     MatCommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatProgressBarModule,
     NgbModule,
   ],
   entryComponents: [
