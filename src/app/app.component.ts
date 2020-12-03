@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Pomodoro App'
   timeTitles = ['Pomodoro', 'Intervalo', 'Intervalo Longo']
   activeTimer = 'Pomodoro'
-  countPomodoro = 3
+  countPomodoro = 0
   countPomodoroDay = 0
   countInterval = 0
   pomodoroTime = 25
@@ -93,7 +93,13 @@ export class AppComponent implements OnInit {
   resetCounters () {
     this.countPomodoro = 0
     this.countInterval = 0
+    this.resetStorageCounter()
   }
+  resetStorageCounter () {
+    this.storageService.setCounters({ countPomodoro: 0, date: this.currentDate })
+    this.countPomodoroDay = 0
+  }
+
   confirmStartLongInterval () {
     this.showDialogConfirm('Vamos Descansar ?',
       'Foram concluídos 4 Pomodoros, é aconselhável um intervalo longo de 10 Minutos, Deseja Iniciar?').then((response) => {
