@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
+import { NotificationService } from './services/notification.service'
 import { StorageService } from './services/storage.service'
 
 @Component({
@@ -21,10 +22,11 @@ export class AppComponent implements OnInit {
   pipe = new DatePipe('pt-BR')
   currentDate: string
 
-  constructor (private storageService: StorageService) { }
+  constructor (private storageService: StorageService, private notificationService: NotificationService) { }
 
   ngOnInit () {
     this.currentDate = this.pipe.transform(new Date(), 'dd/MM/yyyy')
+    this.notificationService.requestPermission()
     this.verifyCounterPomodoroDay()
   }
 
@@ -48,6 +50,7 @@ export class AppComponent implements OnInit {
   }
 
   completeTime (data: any) {
+    this.notificationService.sendNotification(`${data.title} - Timer Finalizado`)
     if (data.title === this.timeTitles[0]) {
       this.activeTimer = this.timeTitles[1]
       this.minutes = this.intervalTime
