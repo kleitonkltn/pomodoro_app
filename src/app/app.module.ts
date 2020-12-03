@@ -8,10 +8,12 @@ import { MatInputModule } from '@angular/material/input'
 import { MatCommonModule } from '@angular/material/core'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
+import { MatDialogModule } from '@angular/material/dialog'
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { registerLocaleData } from '@angular/common'
 import localePt from '@angular/common/locales/pt'
+import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component'
 registerLocaleData(localePt)
 
 
@@ -20,6 +22,7 @@ registerLocaleData(localePt)
   declarations: [
     AppComponent,
     TimerComponent,
+    CustomDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,12 +33,15 @@ registerLocaleData(localePt)
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
     NgbModule,
   ],
   entryComponents: [
+    CustomDialogComponent,
     TimerComponent
   ],
   exports: [
+    CustomDialogComponent,
     TimerComponent
   ],
   providers: [

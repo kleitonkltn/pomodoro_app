@@ -1,5 +1,7 @@
 import { DatePipe } from '@angular/common'
 import { Component, OnInit } from '@angular/core'
+import { MatDialog } from '@angular/material/dialog'
+import { CustomDialogComponent } from './components/custom-dialog/custom-dialog.component'
 import { NotificationService } from './services/notification.service'
 import { StorageService } from './services/storage.service'
 
@@ -12,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'Pomodoro App'
   timeTitles = ['Pomodoro', 'Intervalo', 'Intervalo Longo']
   activeTimer = 'Pomodoro'
-  countPomodoro = 0
+  countPomodoro = 3
   countPomodoroDay = 0
   countInterval = 0
   pomodoroTime = 25
@@ -22,7 +24,10 @@ export class AppComponent implements OnInit {
   pipe = new DatePipe('pt-BR')
   currentDate: string
 
-  constructor (private storageService: StorageService, private notificationService: NotificationService) { }
+  constructor (
+    private storageService: StorageService,
+    private notificationService: NotificationService,
+    private dialog: MatDialog) { }
 
   ngOnInit () {
     this.currentDate = this.pipe.transform(new Date(), 'dd/MM/yyyy')
@@ -60,10 +65,14 @@ export class AppComponent implements OnInit {
         date: this.currentDate
       })
       if (this.countPomodoro === 4) {
-
+        this.confirmStartLongInterval()
       }
     }
     else if (data.title === this.timeTitles[1]) {
+      this.activePomodoroTimer()
+      this.countInterval++
+    }
+    else if (data.title === this.timeTitles[2]) {
       this.activePomodoroTimer()
       this.countInterval++
     }
@@ -76,8 +85,32 @@ export class AppComponent implements OnInit {
     this.activeTimer = this.timeTitles[0]
     this.minutes = this.pomodoroTime
   }
+
+  activeLongIntervalTimer () {
+    this.activeTimer = this.timeTitles[2]
+    this.minutes = this.longIntervalTime
+  }
   resetCounters () {
     this.countPomodoro = 0
     this.countInterval = 0
+  }
+  confirmStartLongInterval () {
+    this.showDialogConfirm('Vamos Descansar ?',
+      'Foram concluídos 4 Pomodoros, é aconselhável um intervalo longo de 10 Minutos, Deseja Iniciar?').then((response) => {
+        if (response) {
+          this.activeLongIntervalTimer()
+          this.countPomodoro = 0
+        } else {
+          this.countPomodoro = 0
+        }
+      })
+  }
+
+  async showDialogConfirm (title: string, msg: string) {
+    const dialogRef = this.dialog.open(CustomDialogComponent, {
+      width: '350px',
+      data: { title, msg }
+    })
+    return await dialogRef.afterClosed().toPromise()
   }
 }
