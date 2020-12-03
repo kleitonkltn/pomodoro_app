@@ -30,7 +30,22 @@
     [minutes]="longIntervalTime" (onComplete)="completeTime($event)">
   </app-timer>
 
-  <div class="form">
+  <div class="statistics">
+    <h3 class="mx-auto">Estatísticas</h3>
+    <p>
+      <span>Pomodoros Concluídos: <b class="ml-1">{{countPomodoro}}</b></span>
+    </p>
+    <p>
+      <span>Intervalos Concluídos: <b class="ml-1">{{countInterval}}</b></span>
+    </p>
+
+    <div class="mt-auto w-100">
+      <button mat-raised-button color="warn" (click)="resetCounters()"
+        class="w-100">
+        <mat-icon>clear</mat-icon>
+        Reiniciar Estatísticas
+      </button>
+    </div>
 
   </div>
 </div>
