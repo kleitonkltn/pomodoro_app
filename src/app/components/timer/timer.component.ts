@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core'
-import { interval } from 'rxjs'
+import { interval, Subscription } from 'rxjs'
 import { AudioService } from 'src/app/services/audio.service'
 
 @Component({
@@ -11,6 +11,7 @@ export class TimerComponent implements OnChanges {
   @Input() title: string
   @Input() minutes: number
   @Output() onComplete = new EventEmitter()
+  timerSubscription: Subscription
   initialValue: number
   seconds = 0
   running = false
@@ -30,12 +31,15 @@ export class TimerComponent implements OnChanges {
       if (this.minutes === 0 && this.seconds === 0) {
         this.reset()
       }
-      interval(1000).subscribe(x => this.update())
+      this.timerSubscription = interval(1000).subscribe(x => this.update())
     }
   }
 
   stop () {
     if (this.running) {
+      if (this.timerSubscription) {
+        this.timerSubscription.unsubscribe()
+      }
       this.running = false
     }
   }
