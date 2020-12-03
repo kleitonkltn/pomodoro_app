@@ -52,8 +52,7 @@ export class AppComponent implements OnInit {
   completeTime (data: any) {
     this.notificationService.sendNotification(`${data.title} - Timer Finalizado`)
     if (data.title === this.timeTitles[0]) {
-      this.activeTimer = this.timeTitles[1]
-      this.minutes = this.intervalTime
+      this.activeIntervalTimer()
       this.countPomodoro++
       this.countPomodoroDay++
       this.storageService.setCounters({
@@ -65,12 +64,18 @@ export class AppComponent implements OnInit {
       }
     }
     else if (data.title === this.timeTitles[1]) {
-      this.activeTimer = this.timeTitles[0]
-      this.minutes = this.pomodoroTime
+      this.activePomodoroTimer()
       this.countInterval++
     }
   }
-
+  activeIntervalTimer () {
+    this.activeTimer = this.timeTitles[1]
+    this.minutes = this.intervalTime
+  }
+  activePomodoroTimer () {
+    this.activeTimer = this.timeTitles[0]
+    this.minutes = this.pomodoroTime
+  }
   resetCounters () {
     this.countPomodoro = 0
     this.countInterval = 0

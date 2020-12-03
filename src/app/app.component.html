@@ -2,7 +2,6 @@
   <h1 class="text-light">Pomodoro Timer</h1>
 </div>
 <div class="timer-body">
-
   <div class="form">
     <mat-form-field class="w-100">
       <mat-label>Tempo de Pomodoro</mat-label>
@@ -19,16 +18,30 @@
       Salvar
     </button>
   </div>
-
-  <app-timer *ngIf="activeTimer == timeTitles[0]" [title]="activeTimer"
-    [minutes]="minutes" (onComplete)="completeTime($event)">
-  </app-timer>
-  <app-timer *ngIf="activeTimer == timeTitles[1]" [title]="activeTimer"
-    [minutes]="minutes" (onComplete)="completeTime($event)">
-  </app-timer>
-  <app-timer *ngIf="activeTimer == timeTitles[2]" [title]="activeTimer"
-    [minutes]="longIntervalTime" (onComplete)="completeTime($event)">
-  </app-timer>
+  <div class="timer-group">
+    <div class=" d-flex flex-row button-group justify-content-center pb-3">
+      <button mat-raised-button class="w-100 m-1"
+        (click)="activePomodoroTimer()"
+        color="{{activeTimer == timeTitles[1] ?'':'primary'}}">Pomodoro
+        Timer</button>
+      <button mat-raised-button class="w-100 m-1"
+        (click)="activeIntervalTimer()"
+        color="{{activeTimer == timeTitles[0] ?'':'primary'}}">Intervalo
+        Timer</button>
+    </div>
+    <app-timer class="timer" *ngIf="activeTimer == timeTitles[0]"
+      [title]="activeTimer" [minutes]="minutes"
+      (onComplete)="completeTime($event)">
+    </app-timer>
+    <app-timer class="timer" *ngIf="activeTimer == timeTitles[1]"
+      [title]="activeTimer" [minutes]="minutes"
+      (onComplete)="completeTime($event)">
+    </app-timer>
+    <app-timer class="timer" *ngIf="activeTimer == timeTitles[2]"
+      [title]="activeTimer" [minutes]="longIntervalTime"
+      (onComplete)="completeTime($event)">
+    </app-timer>
+  </div>
 
   <div class="statistics">
     <h3 class="mx-auto">Estatísticas</h3>
