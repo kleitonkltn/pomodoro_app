@@ -22,7 +22,7 @@
   height: 40vh;
   margin: 10px 30px 10px 30px;
   padding: 30px;
-  width: 30vw;
+  width: 20vw;
   display: flex;
   border-radius: 20px;
   -moz-border-radius: 20px;
@@ -75,4 +75,24 @@
 .timer-group .button-group {
   height: 10vh;
   width: 100%;
+}
+
+@media screen and (max-width: 1035px) {
+  .timer-body {
+    flex-direction: column;
+    justify-content: start;
+  }
+
+  .form {
+    width: 80vw;
+  }
+
+  .timer-group {
+    width: 80vw;
+  }
+
+  .statistics {
+    width: 80vw;
+  }
+
 }
